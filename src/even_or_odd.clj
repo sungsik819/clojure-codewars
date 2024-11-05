@@ -1,1 +1,0 @@
-(ns even-or-odd)
