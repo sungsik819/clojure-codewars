@@ -1,4 +1,4 @@
-(ns find-the-vowels
+(ns kyu-7.find-the-vowels
   (:require [clojure.string :as string]))
 
 (def word "Super")
