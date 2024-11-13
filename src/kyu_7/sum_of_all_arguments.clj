@@ -2,3 +2,5 @@
 
 (defn sum [& xs]
   (apply + xs))
+
+(sum 8 2)
