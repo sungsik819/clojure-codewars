@@ -22,3 +22,10 @@
        (reductions #(rotate-n %1 %2) (str n))
        (map #(Long/parseLong %))
        (apply max)))
+
+;; 다른 방식 풀이
+;; reductions를 iterate로 변경 해보기
+(->> (iterate (fn [[i n]] [(inc i) (rotate-n n i)]) [1 (str n)])
+     (take (count (str n)))
+     (map #(Long/parseLong (second %)))
+     (apply max))
