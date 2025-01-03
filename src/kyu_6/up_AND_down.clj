@@ -6,19 +6,19 @@
 ;; 3. index가 홀수이면 lowercase, 짝수이면 uppercase로 변환
 
 (def strng "turn know great-aunts aunt look A to back")
+
+;; 밑에 ordered? 참고하여 변경
+(defn ordered1? [f s]
+  ((if (odd? (first s)) <= >=) (count (second f)) (count (second s))))
+
 (defn arrange [strng]
   (let [r (loop [mi (map-indexed vector (.split strng " "))
                  f (first mi)
                  s (second mi)
                  result []]
             (if (nil? s) (conj result (second f))
-                (if (odd? (first s))
-                  (if (<= (count (second f))
-                          (count (second s))) (recur (rest mi) s (second (rest mi)) (conj result (second f)))
-                      (recur (rest mi) f (second (rest mi)) (conj result (second s))))
-                  (if (>= (count (second f))
-                          (count (second s))) (recur (rest mi) s (second (rest mi)) (conj result (second f)))
-                      (recur (rest mi) f (second (rest mi)) (conj result (second s)))))))]
+                (if (ordered1? f s) (recur (rest mi) s (second (rest mi)) (conj result (second f)))
+                    (recur (rest mi) f (second (rest mi)) (conj result (second s))))))]
     (string/join " " (map-indexed (fn [i v] (if (even? i) (.toLowerCase v)
                                                 (.toUpperCase v))) r))))
 
